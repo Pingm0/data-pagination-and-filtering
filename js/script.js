@@ -102,6 +102,20 @@ linkList.addEventListener('click', (e) => {
 
 };
 
+/*** 
+ * creating search input
+*/
+
+const label = document.createElement('label');
+const span = document.createElement('span');
+const input = document.createElement('input');
+const button = document.createElement('button');
+
+label.setAttribute("for","search")
+label.className = 'student-search'
+
+console.log(label)
+
 
 
 // Call functions

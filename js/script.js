@@ -5,11 +5,6 @@ FSJS Project 2 - Data Pagination and Filtering
 
 
 
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
 
 
 
@@ -18,12 +13,15 @@ Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
 
+const ul = document.querySelector('.student-list');
+const linkList = document.querySelector('.link-list');
+
 function showPage (list,page) {
 
    const startIndex = (page * 9) - 9 ;
    const endIndex = page * 9 ;
 
-   const ul = document.querySelector('.student-list')
+   
    
    
    ul.innerHTML = ''
@@ -31,9 +29,9 @@ function showPage (list,page) {
       if (i >= startIndex && i < endIndex) {
 
          const img = list[i].picture.large
-         const fullName = list[i].name.first + ' ' + list[i].name.first
+         const fullName = list[i].name.first + ' ' + list[i].name.last
          const email =  list[i].email
-         const dateJoined =  list[i].date
+         const dateJoined =  list[i].registered.date;
 
       const li = document.createElement('li');
       li.innerHTML = `  <li class="student-item cf">
@@ -67,7 +65,7 @@ function addPagination (list) {
 
    numberOfButtons = Math.ceil(list.length / 9);
    
-   const linkList = document.querySelector('.link-list');
+   
    
    linkList.innerHTML = "";
 
@@ -114,7 +112,57 @@ const button = document.createElement('button');
 label.setAttribute("for","search")
 label.className = 'student-search'
 
-console.log(label)
+span.textContent = "Search by name"
+
+input.type = "text"
+input.id = "search"
+input.className = "student-search"
+
+button.type = "button"
+button.setAttribute("src","../img/icn-search.svg")
+button.setAttribute("alt","Search icon")
+
+label.append(span,input,button)
+
+const header = document.querySelector('.header')
+header.appendChild(label);
+
+/*** 
+ * adding event listner
+*/
+
+
+
+
+input.addEventListener('keyup', (e) => {
+   
+   const textInput = input.value.toLowerCase();
+   
+   const searchResult=[];
+   for (i = 0 ; i < data.length ; i++) {
+      const firstName = data[i].name.first.toLowerCase();
+      const lastName = data[i].name.last.toLowerCase();
+      
+         if(firstName.indexOf(textInput) > -1 || lastName.indexOf(textInput) > -1) {
+            searchResult.push(data[i])         }
+   }
+
+   if (searchResult.length > 0){
+      showPage(searchResult,1)
+      addPagination(searchResult)   
+   }
+
+   else {
+      ul.innerHTML = "No results found"
+      linkList.innerHTML = "";
+
+   }
+
+   console.log(searchResult)
+
+
+ 
+})
 
 
 

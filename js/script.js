@@ -14,10 +14,11 @@ This function will create and insert/append the elements needed to display a "pa
 
 function showPage (list,page) {
 
-   //storing the start and end indexes   
+   //storing the start and end indexes
 
-   const startIndex = (page * 9) - 9 ;
-   const endIndex = page * 9 ;
+   const itemsPerPage = 9 ;
+   const startIndex = (page * itemsPerPage) - itemsPerPage ;
+   const endIndex = page * itemsPerPage ;
 
   // makeing sure the ul Element is clear 
    ul.innerHTML = ''
